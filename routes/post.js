@@ -1,16 +1,16 @@
 const express = require('express');
-const router =express.Router();
+const router = express.Router();
 const Post = require('../models/Post');
 
 router.post('/', async (req,res) =>{
 
-    //console.log(req.body); Se utiliza para la respuesta del post en consola
+    console.log(req.body); //Se utiliza para la respuesta del post en consola
     const post = new Post ({
         title: req.body.title,
         description: req.body.description
     });
     try{
-        const savedPost = await post.save();//método que guarda en la BD
+        const savedPost = await Post.save();//método que guarda en la BD
         res.json(savedPost);
     }catch (error){
         res.json({message: error});
@@ -22,19 +22,20 @@ router.post('/', async (req,res) =>{
  */
 router.get('/:postId', async (req,res)=>{
     try{
-        const post = await post.findById(req.params.postId);//encuentra por id
+        const post = await Post.findById(req.params.postId);//encuentra por id
         res.json(post);
     }catch (error){
         res.json({message: error});
     }
 });
 
+
 /**
  * Bloque para borrar un post
  */
 router.delete('/:postId', async (req,res)=>{
     try{
-        const removedPost= await post.remove({_id: res.params.postId});//borra
+        const removedPost= await Post.remove({_id: res.params.postId});//borra
         res.json(removedPost);
     }catch (error){
         res.json({message: error});
