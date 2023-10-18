@@ -27,9 +27,16 @@ app.get('/',(req, res) =>{
 */
 
 //Conexión a la BD
-mongoose.connect('mongodb+srv://mbpadilla4:<password>@cluster0.hiktsv1.mongodb.net/?retryWrites=true&w=majority',
-{useNewUrlParser: true }, () =>{
-    console.log('Si hay conexión a la BD');
+mongoose.connect('mongodb://127.0.0.1:27017/empleados',{
+useNewUrlParser: true,
+useUnifiedTopology: true,
 });
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Error de conexión:'));
+db.once('open', () => {
+  console.log('Conexión a la base de datos establecida correctamente');
+});
+
 //Primero se configura cómo va escuchar el servidor las peticiones
 app.listen(10000);
