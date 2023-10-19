@@ -10,7 +10,7 @@ router.post('/', async (req,res) =>{
         description: req.body.description
     });
     try{
-        const savedPost = await Post.save();//método que guarda en la BD
+        const savedPost = await post.save();//método que guarda en la BD
         res.json(savedPost);
     }catch (error){
         res.json({message: error});

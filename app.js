@@ -30,7 +30,8 @@ app.get('/',(req, res) =>{
 mongoose.connect('mongodb://127.0.0.1:27017/empleados',{
 useNewUrlParser: true,
 useUnifiedTopology: true,
-});
+});//Con los anteriores comandos me aseguro de que mi aplicación utiliza la forma
+//más moderna y eficiente de conectarse a MongoDB
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error de conexión:'));
